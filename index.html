@@ -1,241 +1,889 @@
-<!DOCTYPE html>
-<html lang="en-us">
-<head>
-	<base href="https://cdn.jsdelivr.net/gh/genizy/escape-road-3@main/">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-	<link rel="stylesheet" href="game.css">
-	<meta name="robots" content="noindex, nofollow">
-	<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500&display=swap" rel="stylesheet">
-	<title>Escape Road 3</title>
-	<meta name="description" content=""/>
-	<style type="text/css">
-		.jss1:before {
-			top: 0;
-			width: 100%;
-			filter: blur(16px);
-			height: 100%;
-			content: "";
-			display: block;
-			opacity: .5;
-			z-index: 0;
-			position: absolute;
-			background-size: cover;
-			background-image: url("loading.png")
+
+<!-- created by flexcached 2026-09-23 17:38:10--><!DOCTYPE html><html lang="en-US"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="content-language" content="en"><meta name="external" content="true"><meta name="distribution" content="Global"><meta http-equiv="audience" content="General"><meta name="theme-color" content="#000"><meta name="resource-type" content="Game" /><title>Escape Road 3</title><meta name = "title" content = "Escape Road 3"><meta name="description" content="Escape Road 3 was the most thrilling escape racing gameplay, with magnificent chases and a potential sequel. Experience the difference and challenge your talents."><meta name="keywords" content="escape road 3"><meta name="news_keywords" content="escape road 3"><link rel="image_src" href="/data/image/game/EscapeRoad3-1.png"><link rel="canonical" href="https://slopegameaz.io/escape-road-3"><link rel="icon" href="/cache/data/image/options/slope-game-az-favicon-2-m60x60.png"/><link rel="apple-touch-icon" href="/cache/data/image/options/slope-game-az-favicon-2-m60x60.png"/><link rel="apple-touch-icon" sizes="57x57" href="/cache/data/image/options/slope-game-az-favicon-2-m57x57.png"><link rel="apple-touch-icon" sizes="72x72" href="/cache/data/image/options/slope-game-az-favicon-2-m72x72.png"><link rel="apple-touch-icon" sizes="114x114" href="/cache/data/image/options/slope-game-az-favicon-2-m144x144.png"><meta property="og:title" content="Escape Road 3" itemprop="headline"/><meta property="og:type" content="website" /><meta property="og:url" itemprop="url" content="https://slopegameaz.io/escape-road-3"/><meta property="og:image" itemprop="thumbnailUrl" content="/data/image/game/EscapeRoad3-1.png"/><meta property="og:description" content="Escape Road 3 was the most thrilling escape racing gameplay, with magnificent chases and a potential sequel. Experience the difference and challenge your talents." itemprop="description"/><meta property="og:site_name" content="Slope Game" /><meta name="twitter:title" content="Escape Road 3"/><meta name="twitter:url" content="https://slopegameaz.io/escape-road-3"/><meta name="twitter:image" content="/data/image/game/EscapeRoad3-1.png"/><meta name="twitter:description" content="Escape Road 3 was the most thrilling escape racing gameplay, with magnificent chases and a potential sequel. Experience the difference and challenge your talents."><meta name="twitter:card" content="summary"/>
+<link rel="stylesheet" type="text/css" href="/themes/slopegameaz.io/rs/css/all.css"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <link href="https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@75..125,300..700&family=Quicksand:wght@300..700&display=swap" rel="stylesheet"><script async src="https://www.googletagmanager.com/gtag/js?id=G-6PLTDF33X6"></script><script>window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
 		}
-	</style> 
-</head>
+		gtag('js', new Date());
 
-<body>
-<div id="unity-container" style="display: none;">
-	<canvas id="unity-canvas"></canvas> 
-</div>
-<div id="loadingBlock" style="">
-	<div id="loading-text"
-    style="color: white; font-size: 48px; font-family: cursive; text-align: center; margin-top: 20px;"> LOADING...
-  </div>
-	<div class="jss31 jss34 jss1">
-	<div style="position: absolute; font-family: Arial, Helvetica, sans-serif;	bottom: 10px; right: 10px; font-size: 18px; color: #ffffff; opacity: 0.5;">26041006</div>
-		<div class="spinner"></div>
-		<div class="jss31 jss34 jss48" style="flex: 1 1 0%;">
-			<div class="jss32">
-				<div class="jss7 jss9 jss20 jss3">
-					<div class="jss125">
-						<div class="jss123">
-						 <img src="logo.png">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--PRODUCT_VERSION:26041006END-->
-		<div class="jss31 jss34" style="flex: 3 1 0%;">
-			<div class="jss32">
-				<div class="jss31 jss34 jss39 jss50 gameloader">
-					<div class="jss32">
-						<div class="gameloader-game-name">Escape Road 3</div>
-					</div>
-					<div class="jss32">
-						<div class="jss32 gameloader-logo">
-							<img id="game-logo" src="loading.png">
-						</div>
-					</div>
-					<div class="jss32">
-						<div>
-							<div class="gameloader-progressbar">
-								<div class="gameloader-progressbar-progress" id="progress_fill"
-										 style="width: 0%;"></div>
-							</div>
-							<div class="gameloader-progress-info">Game Loading...</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-	<script>
-    var loadingText = document.querySelector("#loading-text");
-    let totalBytes = 0;
-    let loadedBytes = 0;
-
-    async function fetchWithProgress(url) {
-      const response = await fetch(url);
-      const reader = response.body.getReader();
-      let chunks = [];
-      let received = 0;
-      while (true) {
-        const {
-          done,
-          value
-        } = await reader.read();
-        if (done) break;
-        received += value.length;
-        loadedBytes += value.length;
-        chunks.push(value);
-        let mbDone = (loadedBytes / (1024 * 1024)).toFixed(2);
-        let mbTotal = '162.42';
-        loadingText.textContent = `LOADING... ${mbDone} MB / ${mbTotal} MB`;
-      }
-      let fullBuffer = new Uint8Array(received);
-      let offset = 0;
-      for (let chunk of chunks) {
-        fullBuffer.set(chunk, offset);
-        offset += chunk.length;
-      }
-      return fullBuffer.buffer;
-    }
-
-    async function mergeFiles(fileParts, cacheKey) {
-      const cache = await caches.open("gash-cache");
-      const cachedResponse = await cache.match(cacheKey);
-      if (cachedResponse) {
-        const blob = await cachedResponse.blob();
-        return URL.createObjectURL(blob);
-      }
-      const buffers = await Promise.all(
-        fileParts.map(part => fetchWithProgress(part))
-      );
-      const mergedBlob = new Blob(buffers);
-      const response = new Response(mergedBlob);
-      await cache.put(cacheKey, response);
-      return URL.createObjectURL(mergedBlob);
-    }
-
-    function getParts(file, start, end) {
-      let parts = [];
-      for (let i = start; i <= end; i++) {
-        parts.push(file + ".part" + i);
-      }
-      return parts;
-    }
-    (async () => {
-      const [dataUrl, wasmUrl] = await Promise.all([
-        mergeFiles(getParts("Build/escape-road-3-v26041006.data", 1, 7), "escape-road-3-v26041006.data"),
-        mergeFiles(getParts("Build/escape-road-3-v26041006.wasm", 1, 3), "escape-road-3-v26041006.wasm")
-      ]);
-
-		var buildUrl = "Build";
-		var loaderUrl = buildUrl + "/escape-road-3-v26041006.loader.js";
-		var config = {
-			dataUrl: dataUrl,
-			frameworkUrl: buildUrl + "/escape-road-3-v26041006.framework.js",
-			codeUrl: wasmUrl,
-			streamingAssetsUrl: "StreamingAssets",
-			companyName: "ozgames.io",
-			productName: "Escape Road 3",
-			productVersion: "26041006"
-		};
-		config.gameId = "escape-road-3";
-		config.eventLog = true;
-		let currentDate = new Date();
-		let endLogDate = new Date("2026-04-28T09:43:42.671Z");
-		if(currentDate>endLogDate){
-			config.eventLog=false;
+		gtag('config', 'G-6PLTDF33X6');</script><script>let id_game = '';
+ let url_game = '';
+ let slug_home = "slope-game";
+ let keywords = '';
+ let tag_id = '';
+ let category_id = '';
+ let field_order = '';
+ let order_type = '';
+ let is_hot = '';
+ let is_new = '';
+ let limit = '';</script><script type="application/ld+json">{
+ "@context": "https://schema.org",
+ "@type": "WebSite",
+ "name": "Slope Game",
+ "alternateName": ["Slope Game Game"],
+ "url": "https://slopegameaz.io"
+ }</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Slope Game","image":"https://slopegameaz.io/data/image/options/slo11.jpg","@id":"https://slopegameaz.io/","url":"https://slopegameaz.io","telephone":"(310) 205-2285","priceRange":"$","address":{"@type":"PostalAddress","streetAddress":"1721 N Beverly Dr, Beverly Hills, CA 90210","addressLocality":"Beverly Hills","addressRegion":"CA","postalCode":"90210","addressCountry":"US"},"OpeningHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"},"sameAs":["https://x.com/Slopegameaz","https://www.tiktok.com/@slopegameazofficial","https://www.reddit.com/user/Ok-Bid7933/","https://about.me/slopegameofficial/","https://www.pinterest.com/muskrika/","https://www.tumblr.com/blog/slopegameaz","https://www.twitch.tv/slopegameaz/","https://telegra.ph/Slope-game-az-03-08","https://www.youtube.com/@SlopeGameAz","https://vimeo.com/slopegameaz","https://500px.com/p/slopegameaz?view=photos","https://www.behance.net/slopegame13","https://flipboard.com/@slopegameaz/play-game-slope-33b70abay","https://bsky.app/profile/slopegameaz.bsky.social","https://www.goodreads.com/user/show/199422723-slope-game","https://www.band.us/band/101864155/post","https://www.producthunt.com/@slopegameaz","https://github.com/Slope-game-az","https://gitlab.com/muskrika","https://fr.quora.com/profile/Slope-Game-2","https://www.instapaper.com/p/17533166","https://gravatar.com/totallycreationca23bf88dd","https://heylink.me/muskrika","https://qiita.com/Slopegameaz","https://www.pearltrees.com/slopegameaz","https://wakelet.com/@slopegameaz","https://www.kickstarter.com/profile/slopegameazofficial/about","https://www.indiegogo.com/en/profile/slopegameaz#/overview","https://fundrazr.com/profiles/musk-rika","https://giphy.com/channel/Slopegameaz","https://www.skillshare.com/en/profile/Slope-Game/903144354","https://devpost.com/Slope-game-az","https://scholar.google.com/citations?hl=en&amp;authuser=3&amp;user=BLT1FocAAAAJ","https://www.facebook.com/profile.php?id=61582166159921","https://www.instagram.com/muskrika/","https://myspace.com/slopegameaz","https://issuu.com/slopegameaz","https://www.boltjobs.com/companies/slope-game-official-6896477","https://www.raycast.com/slope_game","https://www.empowher.com/users/jessicaabba","https://yoomark.com/users/goalken","https://jobs.barazalab.com/candidate/noahwittman0208/","https://www.hotfrog.com/company/a058deffbc578d7e37d0503d3226900a/slope-game/beverly-hills/games-toys","https://www.brownbook.net/business/54904365/slope-game-official","https://moz.com/community/q/user/muskrika-gli5at","https://www.cylex.us.com/company/slope-game-40548822.html","https://firmania.com/beverly-hills/slope-game-19671293","https://www.merchantcircle.com/slope-game-official-beverly-hills-ca","https://wellfound.com/u/slope-game-official","https://us.enrollbusiness.com/BusinessProfile/7741099/Slope%20game%20official","https://karirku.itpln.ac.id/employer/slopegameaz/","https://www.sanjose.com/slope-game-official-b39018251","https://chiemgaujobs.de/organization/slope-game-official","https://bookbuzzr.com/books/24479/play-game-slope-at-slopegameazio","https://www.jobsearchdigest.com/company/slope-game-official/","https://retizen.republika.co.id/posts/746812/play-game-slope-","https://slopegame48.wordpress.com/","https://slopegameaz.blogspot.com/","https://sites.google.com/view/slopegameaz/"]} </script><link rel="preload" href="/themes/slopegameaz.io/rs/css/ads.css" as="style" /><link rel="stylesheet" href="/themes/slopegameaz.io/rs/css/ads.css" /><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1219606540673841" crossorigin="anonymous"></script><style>.throw-ads-responsive{
+			display:none;
 		}
-function isDiffHost() {
-  return false;
-}
-		window["GMSOFT_SDKTYPE"] = "gm";
-		localStorage.setItem("gmsdksigndomain", "ewogICJzaWduZWQiOiAibStVenRwc20xL1dkU05STEFGS0x3YVl0dzg4b296QlA0QktaeHY5cnNadUluNWlMUWZxMUk3ZEcwbnlIN3hKamRBVTEvQUQ5dlFNUW1EeWNZUzRtb3F0VGlFd0N4WHoyTytzbllWMXhyTjBMM3Z4cnVKblJIM2dpMFJpQUVIaW8rU2pDNkEwSFBsN3lTT0V2TCsyY2g5OEdrN2NDRWV6eTEwcEtCTll2akRZNldVRHRZN3ZSdW43dnAvb2VKSXJjeEJNZjl4UWxONURVTkJEN0JvNzRTYlNmWEdYY3dWUi81TkJQQ2hzRnh0cFhOaHpIWURhUVRkYWtrQjdjVENSYVBGQ2VxREN3N1FDQkhoK0ZOZFNXdVEwbm5RMm1QRTJ4alVqOXV1Y0kxWGdQNGZpNmJMVTRRMFhiRkh1SzRsRENLVWF4ZlBmbmxFemZ0UXdOR0MrY09BPT0iLAogICJhcCI6ICJ5ZXMiLAogICJobiI6ICJvZnJlZS5pbyIsCiAgImRvbWFpbiI6ICJvZnJlZS5pbyIsCiAgInMiOiAieWVzIiwKICAic3R5cGUiOiAyCn0=");
-
-		var progressElement = document.getElementById('progress_fill');
-		var container =	document.getElementById("unity-container");
-		var canvas =	document.getElementById("unity-canvas");
-		var loadingBar = document.querySelector("#loadingBlock");
-		var progressBarFull = document.querySelector("#progress_fill");
-		var progress_text = document.querySelector(".gameloader-progress-info");
-		var loadingtext = document.querySelector("#loading-text");
-		let text_percent = "";
-		var script = document.createElement("script");
-		script.src = loaderUrl;
-		script.onload = () => {
-		createUnityInstance(canvas, config, (progress) => {
-			progressElement.style.width = 100 * progress + "%";
-			text_percent = "Downloading file: " + Math.round(progress*100) + "%";
-			progress_text.innerText = text_percent;
-			if (progress >= 99) {
-				progress_text.innerText = "Game Loading ...";
+		@media(min-width:768px){
+			.throw-ads-responsive{
+				display:block;
 			}
-		}).then((unityInstance) => {
-			window.unityInstance = unityInstance;
-			setTimeout(function() {
-				loadingBar.style.display = "none";
-			loadingtext.remove()
-				window.focus();
-			}, 2000);
-			container.style.display = "block";
-		}).catch((message) => {
-			alert(message);
-		});
-		};
-		document.body.appendChild(script);
-	})();
-	</script>
-	<script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-auth-compat.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-analytics-compat.js"></script>
-	<script type="module">
-		const firebaseConfig = {
-    apiKey: "AIzaSyDUyjnqlS0gquhgZBuoXHs-kRSOMG-htU4",
-    authDomain: "ofree-32967.firebaseapp.com",
-    projectId: "ofree-32967",
-    storageBucket: "ofree-32967.firebasestorage.app",
-    messagingSenderId: "777959803199",
-    appId: "1:777959803199:web:cca8a2a59ce3b36749eb8a",
-    measurementId: "G-MEMBWQ3ZR8"
-  };
-		if (typeof firebaseConfig !== 'undefined'){
-			if(firebaseConfig ){
-				window.dataLayer = window.dataLayer || [];
-				window.gtag = function () { window.dataLayer.push(arguments); }
+		}
+		.ads-title{
+			clear: both;
+			padding-bottom: 8px;
+		}</style></head><body><script type="text/javascript">var themeurl = "http:\/\/slopegameaz.io\/themes\/slopegameaz.io\/";
+ function get_format_url(controller, action) {
+ var urlformat = null;
+ urlformat = urlformat.replace(':c:', controller);
+ return urlformat.replace(':a:', action);
+ }</script><header><div class="container "><div class="header-box navbg"><div class="d-flex col"><nav class="d-flex al jc header__bar"><div class="header__wrapper "><div class="header_logo"><a class="navbar-brand fw-semibold f28" id="header_logo" href="/"><img class="d-block menu_logo" width="auto" height="42" src="/cache/data/image/options/slo11-hx42.webp" alt="Logo"></a></div><div class="header__bar--searchbox"><form action="/search" method="GET"><input class="header__bar--searchbox-input" type="text" name="q" autocomplete="off" placeholder="Search" /><button class="center-box header__bar--searchbox-submit" aria-label="Search"><svg enable-background="new 0 0 32 32" id="Glyph" version="1.1" viewBox="0 0 32 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M27.414,24.586l-5.077-5.077C23.386,17.928,24,16.035,24,14c0-5.514-4.486-10-10-10S4,8.486,4,14 s4.486,10,10,10c2.035,0,3.928-0.614,5.509-1.663l5.077,5.077c0.78,0.781,2.048,0.781,2.828,0 C28.195,26.633,28.195,25.367,27.414,24.586z M7,14c0-3.86,3.14-7,7-7s7,3.14,7,7s-3.14,7-7,7S7,17.86,7,14z" id="XMLID_223_" /></svg></button></form></div><ul class="navbar-nav header__bar--navigation"><li class="nav-item"><a class="nav-link btn-warn" href="/games/arcade-games">Arcade Games</a></li><li class="nav-item"><a class="nav-link btn-warn" href="/games/3d-games">3D Games</a></li><li class="nav-item"><a class="nav-link btn-warn" href="/games/running-games">Running Games</a></li><li class="nav-item"><a class="nav-link btn-warn" href="/games/endless-runner">Endless Runner</a></li><!-- <li class="nav-item"><a class="nav-link" href="/all-games">All Games🎮</a></li><li class="nav-item"><a class="nav-link btn-warn" href="/new-games">New 🔥</a></li> --></ul><button onclick="openNav()" class="center-box header__bar--open" aria-label="Open nav"><span class="navbar-toggle-icon"></span></button></div></nav><nav class="mobile--header__nav-list hidden"><div class="header__nav--search-box"><form action="/search" method="GET"><input class="header__nav--searchbox-input mobile" type="text" name="q" autocomplete="off" placeholder="Search" /><button class="center-box header__bar--searchbox-submit" aria-label="Search"><svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="m-2"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.67203 1.50471e-08C5.60802 9.06589e-05 4.55946 0.25462 3.61383 0.742353C2.6682 1.23009 1.85292 1.93688 1.23601 2.80376C0.619105 3.67065 0.218458 4.67249 0.0674994 5.7257C-0.0834596 6.7789 0.0196459 7.85294 0.368214 8.8582C0.716782 9.86346 1.3007 10.7708 2.07127 11.5045C2.84183 12.2382 3.77668 12.777 4.79783 13.0759C5.81898 13.3749 6.89682 13.4253 7.94141 13.223C8.98601 13.0206 9.96708 12.5715 10.8028 11.9129L13.6696 14.7796C13.8177 14.9226 14.016 15.0018 14.2218 15C14.4276 14.9982 14.6245 14.9156 14.7701 14.7701C14.9156 14.6245 14.9982 14.4277 15 14.2218C15.0018 14.016 14.9226 13.8177 14.7796 13.6697L11.9128 10.8029C12.6884 9.81904 13.1713 8.63669 13.3062 7.39118C13.4412 6.14567 13.2228 4.88732 12.676 3.76014C12.1292 2.63296 11.276 1.6825 10.2142 1.01752C9.15245 0.352541 7.92489 -8.41056e-05 6.67203 1.50471e-08ZM1.56946 6.67235C1.56946 5.31911 2.10705 4.0213 3.06397 3.06442C4.02089 2.10754 5.31875 1.56996 6.67203 1.56996C8.02532 1.56996 9.32318 2.10754 10.2801 3.06442C11.237 4.0213 11.7746 5.31911 11.7746 6.67235C11.7746 8.02559 11.237 9.3234 10.2801 10.2803C9.32318 11.2372 8.02532 11.7747 6.67203 11.7747C5.31875 11.7747 4.02089 11.2372 3.06397 10.2803C2.10705 9.3234 1.56946 8.02559 1.56946 6.67235Z" fill="#1E1E1E"></path></svg></button></form></div></nav><nav class="mobile--header__nav-list hidden"><ul class="d-flex col nav-list"><li class="nav-item"><a class="nav-link btn-warn" href="/games/arcade-games">Arcade Games</a></li><li class="nav-item"><a class="nav-link btn-warn" href="/games/3d-games">3D Games</a></li><li class="nav-item"><a class="nav-link btn-warn" href="/games/running-games">Running Games</a></li><li class="nav-item"><a class="nav-link btn-warn" href="/games/endless-runner">Endless Runner</a></li><!-- <li class="nav-item"><a class="nav-link" href="/all-games">All Games🎮</a></li><li class="nav-item al "><a class="nav-link btn-warn" href="./new-games">New 🔥</a></li> --></ul></nav></div></div></div></header><div class="throw-ads-responsive" style="margin:1rem 0"><div class="ads"><div class="ads-margin"><div class="ads-title horizontal-title">Advertisement</div><div class="ads" style="width: 728px; height:90px;"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1219606540673841"
+ crossorigin="anonymous"></script><!-- hgames-728x90 --><ins class="adsbygoogle"
+ style="display:inline-block;width:728px;height:90px"
+ data-ad-client="ca-pub-1219606540673841"
+ data-ad-slot="3325832818"></ins><script>(adsbygoogle = window.adsbygoogle || []).push({});</script> </div></div></div></div><section class="game game__play"><div class="container"><div class="row"><div class="game__play--grid"><div class="game__play-col"><div class="iframe-box"><iframe id="iframehtml5" width="100%" class="d-block" title="Escape Road 3" src="/escape-road-3.embed" frameborder="0" border="0" scrolling="no" class="iframe-default" allowfullscreen ></iframe><span class="exit-fullscreen hidden" id="_exit_full_screen"><svg fill="#fff" width="24" height="24" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;"><g><g><path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717 L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859 c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287 l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285 L284.286,256.002z" /></g></g></svg></span><script>function scrollToDiv(element) {
+ if ($(element).length) {
+ $('html,body').animate({
+ scrollTop: $(element).offset().top - 100
+ }, 'slow');
+ }
+ }</script> </div><div class="game__info"><div class="game__info-header header-game"><h1>Escape Road 3</h1><div class="resize-btn-wrapper"><div id="append-rate"> <div id="rating"><div class="inner-rating" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating"><div id="full_rate_1" class="full_rate"><div class="text-center"><div class="rating_hover rating-element"><div class="rating" id="default-demo" data-id="47" style="cursor: pointer;" data-score="4.7" data-readonly=""></div></div><span class="rating-element" id="rate-avg" rel="v:rating"><span class="rate-info"><span id="countrate">61 votes </span><span itemprop="ratingValue" class="rating-num gorgeous" id="averagerate">4.7</span><span class="rating-num gorgeous">/</span><span itemprop="bestRating" class="rating-num gorgeous">5</span></span></span></div></div></div></div><script type="text/javascript">var dir_theme = '/themes/slopegameaz.io/';
+ var domain_url = 'https://slopegameaz.io';</script><!--<script type="text/javascript" src="rs/plugins/raty/jquery.raty.js"></script>--><script>function loadScript(src, callback) {
+ return new Promise(function(resolve, reject) {
+ if ($("script[src='" + src + "']").length === 0) {
+ var script = document.createElement('script');
+ script.onload = function() {
+ resolve(callback());
+ };
+ script.onerror = function() {
+ reject();
+ };
+ script.src = src;
+ document.body.appendChild(script);
+ } else {
+ resolve(callback());
+ }
+ });
+ }
+ document.addEventListener("DOMContentLoaded", (event) => {
+ loadScript('/themes/slopegameaz.io/rs/plugins/raty/jquery.raty.js', function() {
+ rateForFun();
+ ratingJs();
+ })
 
-				window.gtag("config", firebaseConfig.measurementId, {
-				  cookie_domain: window.location.hostname,
-				  cookie_flags: "SameSite=None;Secure",
-				});
-				// Initialize Firebase
-				const app = firebase.initializeApp(firebaseConfig);
-				//const auth = getAuth(app);
-			}
-		}		
-	</script>
-	<script>
-		function firebaseSetUserProperties(props) {
-			if (typeof firebaseConfig === 'undefined') return;
-				firebase.analytics().setUserProperties(props);
-		}
-		function firebaseLogEvent(event_name) {
-			if (typeof firebaseConfig === 'undefined') return;
-				firebase.analytics().logEvent(event_name);
-			
-		}
-		function firebaseLogEventParameter(event_name, event_param) {
-			if (typeof firebaseConfig === 'undefined') return;
-				firebase.analytics().logEvent(event_name, event_param);			
-		}
-	</script>
-	
-</body>	
-</html>
+ });
+
+ function rateForFun() {
+ var readonly = $(this).data('readonly');
+ $('.default-rating').raty({
+ readOnly: function() {
+ return $(this).data('readonly');
+ },
+ score: function() {
+ return $(this).attr('data-score');
+ },
+ });
+ }
+
+ function ratingJs() {
+ var readdddonly;
+ var style = '-big';
+ readdddonly = $('#default-demo').attr('data-readonly');
+ $('#default-demo').raty({
+ readOnly: readdddonly,
+ cancelOff: dir_theme + 'rs/plugins/raty/images/cancel-off.png',
+ cancelOn: dir_theme + 'rs/plugins/raty/images/cancel-on.png',
+ starHalf: dir_theme + 'rs/plugins/raty/images/star-half' + style + '.png',
+ starOff: dir_theme + 'rs/plugins/raty/images/star-off' + style + '.png',
+ starOn: dir_theme + 'rs/plugins/raty/images/star-on' + style + '.png',
+ half: true,
+ number: 5,
+ numberMax: 5,
+ score: function() {
+ return $(this).attr('data-score');
+ },
+ click: function(score, evt) {
+ var game_id = $(this).attr('data-id');
+ var rate = $(this).attr('data-score');
+ var url = '/rate-game.ajax';
+ var data = {
+ 'game_id': game_id,
+ 'score': score
+ };
+ $.ajax({
+ type: "POST",
+ url: url,
+ data: data,
+ cache: false,
+ success: function(html) {
+ var data = $.parseJSON(html);
+ $('#countrate').text(data.rate_count + ' votes ');
+ let rate_average = parseFloat(data.rate_average);
+ $('#averagerate').text(rate_average > 3.5 ? rate_average : 3.5);
+ $('#gorgeous-bar').css("width", data.gorgeous + "%");
+ $('#gorgeous-bar-value').html(data.gorgeous + "%");
+ $('#good-bar').css("width", data.good + "%");
+ $('#good-bar-value').html(data.good + "%");
+ $('#regular-bar').css("width", data.regular + "%");
+ $('#regular-bar-value').html(data.regular + "%");
+ $('#poor-bar').css("width", data.poor + "%");
+ $('#poor-bar-value').html(data.poor + "%");
+ $('#bad-bar').css("width", data.bad + "%");
+ $('#bad-bar-value').html(data.bad + "%");
+ $(".rating-num").addClass(data.class);
+ $(".rate-title").addClass(data.class);
+ $(".rate-title").html(data.name);
+ $('#default-demo').raty({
+ readOnly: true,
+ cancelOff: dir_theme + 'rs/plugins/raty/images/cancel-off.png',
+ cancelOn: dir_theme + 'rs/plugins/raty/images/cancel-on.png',
+ starHalf: dir_theme + 'rs/plugins/raty/images/star-half' + style + '.png',
+ starOff: dir_theme + 'rs/plugins/raty/images/star-off' + style + '.png',
+ starOn: dir_theme + 'rs/plugins/raty/images/star-on' + style + '.png',
+ half: true,
+ number: 5,
+ numberMax: 5,
+ score: score
+ });
+ $("#default-demo").css("cursor: pointer;");
+ },
+ error: function() {
+ $('#default-demo').raty({
+ readOnly: true,
+ cancelOff: dir_theme + 'rs/plugins/raty/images/cancel-off.png',
+ cancelOn: dir_theme + 'rs/plugins/raty/images/cancel-on.png',
+ starHalf: dir_theme + 'rs/plugins/raty/images/star-half' + style + '.png',
+ starOff: dir_theme + 'rs/plugins/raty/images/star-off' + style + '.png',
+ starOn: dir_theme + 'rs/plugins/raty/images/star-on' + style + '.png',
+ half: true,
+ number: 5,
+ numberMax: 5,
+ score: rate,
+ });
+ }
+ });
+ }
+ });
+ }</script></div><span class="expand-btn" id="half-expand" data-title="Theater mode" onclick="theaterMode()"><svg width="14px" height="14px" viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><path d="M0 0v4l1.5-1.5 1.5 1.5 1-1-1.5-1.5 1.5-1.5h-4zm5 4l-1 1 1.5 1.5-1.5 1.5h4v-4l-1.5 1.5-1.5-1.5z"></path></svg></span><span class="expand-btn" data-title="Fullscreen" id="expand"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="m-3 my-2"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.57306 7.35248C5.30438 7.35907 5.04846 7.46838 4.85797 7.65802L2.09998 10.4153V9.45001L2.09509 9.34918C2.06909 9.08081 1.9408 8.8327 1.73682 8.65631C1.5329 8.47992 1.26886 8.38879 0.999512 8.40173C0.730225 8.41467 0.476196 8.53076 0.2901 8.72595C0.104004 8.92108 0.00012207 9.18036 0 9.45001V12.95L0.00488281 13.0508C0.0299683 13.3106 0.150879 13.5518 0.344116 13.7273C0.537354 13.9028 0.789001 14 1.04999 14H4.54999L4.65082 13.9951C4.91919 13.9691 5.1673 13.8408 5.34369 13.6368C5.52008 13.4329 5.61121 13.1689 5.59827 12.8995C5.58533 12.6302 5.46924 12.3762 5.27405 12.1901C5.07892 12.004 4.81964 11.9001 4.54999 11.9H3.58398L6.34271 9.1427L6.41479 9.06293C6.58392 8.854 6.6665 8.58826 6.64557 8.32031C6.62463 8.05243 6.50171 7.80267 6.30219 7.62262C6.10272 7.44263 5.84174 7.34589 5.57306 7.35248ZM13.6559 0.272705C13.4626 0.097229 13.211 0 12.95 0H9.45001L9.34918 0.00488281C9.08081 0.0309448 8.8327 0.15918 8.65631 0.363159C8.47992 0.567139 8.38879 0.831116 8.40173 1.10046C8.41467 1.36981 8.53076 1.62384 8.72595 1.80994C8.92108 1.99597 9.18036 2.09985 9.45001 2.09998H10.416L7.65729 4.8573L7.58521 4.93707C7.41461 5.14581 7.33087 5.41211 7.3512 5.68085C7.37158 5.94965 7.49451 6.20032 7.69452 6.38092C7.89459 6.56152 8.15649 6.65833 8.4259 6.65118C8.69537 6.6441 8.95172 6.53363 9.14203 6.34271L11.9 3.58472V4.54999L11.9049 4.65082C11.9309 4.91919 12.0592 5.1673 12.2632 5.34369C12.4671 5.52008 12.7311 5.61121 13.0005 5.59827C13.2698 5.58533 13.5238 5.46924 13.7099 5.27405C13.896 5.07892 13.9999 4.81964 14 4.54999V1.04999L13.9951 0.949219C13.97 0.689392 13.8491 0.448242 13.6559 0.272705ZM6.64752 5.57306C6.64093 5.30438 6.53162 5.04846 6.34198 4.85797L3.58472 2.09998H4.54999L4.65082 2.09509C4.91919 2.06909 5.1673 1.9408 5.34369 1.73682C5.52008 1.5329 5.61121 1.26886 5.59827 0.999512C5.58533 0.730225 5.46924 0.476196 5.27405 0.2901C5.07892 0.104004 4.81964 0.00012207 4.54999 0H1.04999L0.949219 0.00488281C0.689392 0.0299683 0.448242 0.150879 0.272705 0.344116C0.097229 0.537354 0 0.789001 0 1.04999V4.54999L0.00488281 4.65082C0.0309448 4.91919 0.15918 5.1673 0.363159 5.34369C0.567139 5.52008 0.831116 5.61121 1.10046 5.59827C1.36981 5.58533 1.62384 5.46924 1.80994 5.27405C1.99597 5.07892 2.09985 4.81964 2.09998 4.54999V3.58398L4.8573 6.34271L4.93707 6.41479C5.146 6.58392 5.41174 6.6665 5.67969 6.64557C5.94757 6.62463 6.19733 6.50171 6.37738 6.30219C6.55737 6.10272 6.65411 5.84174 6.64752 5.57306ZM13.7273 13.6559C13.9028 13.4626 14 13.211 14 12.95V9.45001L13.9951 9.34918C13.9691 9.08081 13.8408 8.8327 13.6368 8.65631C13.4329 8.47992 13.1689 8.38879 12.8995 8.40173C12.6302 8.41467 12.3762 8.53076 12.1901 8.72595C12.004 8.92108 11.9001 9.18036 11.9 9.45001V10.416L9.1427 7.65729L9.06293 7.58521C8.85419 7.41461 8.58789 7.33087 8.31915 7.3512C8.05035 7.37158 7.79968 7.49451 7.61908 7.69452C7.43848 7.89459 7.34167 8.15649 7.34882 8.4259C7.3559 8.69537 7.46637 8.95172 7.65729 9.14203L10.4153 11.9H9.45001L9.34918 11.9049C9.08081 11.9309 8.8327 12.0592 8.65631 12.2632C8.47992 12.4671 8.38879 12.7311 8.40173 13.0005C8.41467 13.2698 8.53076 13.5238 8.72595 13.7099C8.92108 13.896 9.18036 13.9999 9.45001 14H12.95L13.0508 13.9951C13.3106 13.97 13.5518 13.8491 13.7273 13.6559Z" fill="black"></path></svg></span></div></div><div class="divider-y"></div><ul class="game__detail"></ul></div><div class="row"><div class="CarouselContainer"><div class="games-label game_umaylike-title" style="justify-content: flex-start;">Games You May Like</div><div class="GameCarousel_root"><button disabled class="GameCarousel_root_arrow GameCarousel_root_arrowleft"></button><div class="GameCarousel_prime"><a href="/soflo-wheelie-life" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/soflo-wheelie-life-f200x200.png" alt="SoFlo Wheelie Life" title="SoFlo Wheelie Life" /><span class="text-overflow">SoFlo Wheelie Life</span></div></a><a href="/escape-road-2" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/EscapeRoad2-f200x200.jpg" alt="Escape Road 2" title="Escape Road 2" /><span class="text-overflow">Escape Road 2</span></div></a><a href="/color-rush" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/color-rush-f200x200.png" alt="Color Rush" title="Color Rush" /><span class="text-overflow">Color Rush</span></div></a><a href="/race-survival" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/survival-race-m210x210-f200x200.webp" alt="Race Survival" title="Race Survival" /><span class="text-overflow">Race Survival</span></div></a><a href="/curve-rush-2" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/CurveRush2-f200x200.png" alt="Curve Rush 2" title="Curve Rush 2" /><span class="text-overflow">Curve Rush 2</span></div></a><a href="/airborne-bmx" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/Airbornebmxgame-f200x200.jpg" alt="Airborne BMX" title="Airborne BMX" /><span class="text-overflow">Airborne BMX</span></div></a><a href="/stunt-bike-extreme" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/stuntbikeextremegame-f200x200.jpg" alt="Stunt Bike Extreme" title="Stunt Bike Extreme" /><span class="text-overflow">Stunt Bike Extreme</span></div></a><a href="/slope-car" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/SlopeCar-f200x200.webp" alt="Slope Car" title="Slope Car" /><span class="text-overflow">Slope Car</span></div></a><a href="/geometry-vibes-3d" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/Geometry-Vibes-3D-f200x200.jpg" alt="Geometry Vibes 3D" title="Geometry Vibes 3D" /><span class="text-overflow">Geometry Vibes 3D</span></div></a><a href="/traffic-rally" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/TrafficRally-f200x200.jpg" alt="Traffic Rally" title="Traffic Rally" /><span class="text-overflow">Traffic Rally</span></div></a><a href="/sledge-rider" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/sledgerider-f200x200.jpg" alt="Sledge Rider" title="Sledge Rider" /><span class="text-overflow">Sledge Rider</span></div></a><a href="/escape-road" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/escape-road-f200x200.jpg" alt="Escape Road" title="Escape Road" /><span class="text-overflow">Escape Road</span></div></a><a href="/lift-off-2" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/LiftOff2-f200x200.webp" alt="Lift Off 2" title="Lift Off 2" /><span class="text-overflow">Lift Off 2</span></div></a><a href="/smash-karts" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/smash-karts-f200x200.jpg" alt="Smash Karts" title="Smash Karts" /><span class="text-overflow">Smash Karts</span></div></a><a href="/rolling-ball" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/RollingBall-f200x200.jpeg" alt="Rolling Ball" title="Rolling Ball" /><span class="text-overflow">Rolling Ball</span></div></a><a href="/rolling-sky" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/Rollingsky-f200x200.png" alt="Rolling Sky" title="Rolling Sky" /><span class="text-overflow">Rolling Sky</span></div></a><a href="/hyper-tunnel" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/HyperTunnel-f200x200.jpg" alt="Hyper Tunnel" title="Hyper Tunnel" /><span class="text-overflow">Hyper Tunnel</span></div></a><a href="/slope-xtreme" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/slope-extreme-game-f200x200.png" alt="Slope Xtreme" title="Slope Xtreme" /><span class="text-overflow">Slope Xtreme</span></div></a><a href="/wave-road" class="GameCarousel_prime-item"><div class="game_umaylike-wrapper"><img width="200" height="200" loading="lazy" class="d-block" src="/cache/data/image/game/wave-road-game-online-f200x200.jpg" alt="Wave Road" title="Wave Road" /><span class="text-overflow">Wave Road</span></div></a></div><button disabled class="GameCarousel_root_arrow GameCarousel_root_arrowright"></button></div></div></div><div class="home__desc game__desc"><div class="game__breadcum" style="margin-top:0"><div class="overwrite-breadcumb"><div class="d-r-flex al bread-crumb-list"><a class="bread-crumb-item" href="/">Home</a><a class="bread-crumb-item" href="/games/running-games">Running Games</a><span class="bread-crumb-item bread-after">Escape Road 3</span></div></div></div><p>Following the success of the <em>Escape Road</em> series, <strong>Escape Road 3</strong> is released with the most thrilling escape racing gameplay, delivering breathtaking chases and promising another successful installment. Experience the difference and push your skills to the limit.</p><h2>Escape Road 3: The spectacular evolution of a legendary series</h2><p>The world of browser-based games is constantly evolving and developing. Among the countless entertainment options available today, speed games always hold a unique place in the hearts of fans. We've witnessed the explosion of many endless runner games. Now, a new craze has officially emerged.</p><p><a href="https://slopegameaz.io/escape-road-3">Escape Road 3</a>, the third installment in the popular escape racing game series, has officially been released. This game not only inherits the best aspects of its predecessors but also brings a true revolution in gameplay and graphics. If you're a speed enthusiast, this is definitely a title you can't miss.</p><h3>What's New in This Version?</h3><p>The game is built entirely on modern HTML5 technology. This means you'll never have to worry about downloading anything. There will be no complicated installation files. No time-consuming updates. All you need is a regular web browser. With just one click, you're instantly behind the wheel.</p><h4>New Features Only in Escape Road 3</h4><ul><li>Achievements: Added to this version. You can complete fun challenges, reach milestones, and receive awesome rewards.</li><li>New Challenger!: A "suicide drone" has been deployed. Beware, they are very dangerous!</li><li>Introducing new lands, new experiences, and new missions. With over 90+ vehicles, 30+ characters, and 10+ missions.</li><li>Swimming: Now you can swim underwater to escape your pursuers, but it's also more dangerous, so don't be careless.</li></ul><p><img src="https://slopegameaz.io/data/image/escape-road-3.jpg" alt="play game escape road 3 free online" width="722" height="412" loading="lazy" /></p><h2>The Core Gameplay Mechanism of Escape Road 3</h2><p>The core of the game revolves around a single goal: Survival. You play as a driver being relentlessly pursued by the police. Your mission is to escape for as long as possible.</p><p>With each passing second, the difficulty of the game increases. The pursuing forces become more numerous, with many faster and more dangerous vehicles to chase you.</p><h3>Controls</h3><ul style="list-style-type: circle;"><li>Simply use the left and right arrow keys or the A and D keys to skillfully control your car to escape and shake off the pursuing police.</li></ul><h3>Tips and Tactics to Dominate the Leaderboard</h3><p>You need clear strategies and a cool head. Here are the most important tips to help you break through the score:</p><ul style="list-style-type: circle;"><li>Master the art of driving: Use the arrow keys or the A/D keys decisively. Your car has a lot of inertia. Press and release keys repeatedly instead of holding down a single key to avoid losing control and spinning out of control.</li><li>"Borrowing a knife to kill" tactic: Don't try to escape in a straight line. Intentionally swerve through buildings, trees, or other hard obstacles. The goal is to lure the police cars behind you into crashing into these obstacles and destroying each other.</li><li>Collect coins: Along the escape route, you'll see many gold coins scattered around. Try to collect them. However, don't rush headlong into death for a single coin. Assess the risks before turning to pick up loot.</li><li>Observe (Suicide Drone): When drones appear, you must scan the entire screen to observe. Predicting the enemy's attack direction will give you a precious extra second to dodge.</li></ul><h2>Escape Road 3 is attracting thousands of gamers. What are you waiting for? Try it now!</h2><p>The irresistible appeal of <em>Escape Road 3</em> lies in its perfect balance of explosive entertainment and intense challenge. The game completely eliminates unnecessary elements, placing you right in the center of exhilarating chaos. Each level presents a completely new scenario thanks to its randomly generated obstacles and map.</p><p><strong>Escape Road 3</strong> is not simply a racing game; it's a test of courage, composure, and decision-making under high pressure. Spectacular explosions, tire-burning maneuvers, and the thrill of breaking your own record await you. Put your hands on the keyboard, hit the gas pedal, and prove to the world who the real king of the escape routes is.</p><p>The game's rapid pace perfectly suits modern lifestyles. But if you want to try other equally exciting games like <a href="https://slopegameaz.io/slope-2">Slope 2</a>, Slope 3, etc., check out the&nbsp;<a href="https://slopegameaz.io/escape-road-2">Escape Road 2</a> version on our website, which is always compiled and updated regularly.</p> <div style='font-family: "Fredoka", sans-serif;font-size:1.17em;margin:1em 0'>Category and Tags</div><div class="navbar-nav"><a class="btn-warn tag-cate" href="/games/running-games">Running Games</a><a class="btn-warn tag-cate" href="/games/arcade-games">Arcade Games</a><a class="btn-warn tag-cate" href="/tag/car-game">Car Game</a></div><div class="row game_comments"><div class="games-label" style="justify-content: flex-start;margin: 1rem 0;">Discuss Escape Road 3</div><div id="append-comment"><div class="comment-company"><div id="comments_area"><div class="comment_loading"></div><div id="list_comment"><style>.pending-comment {
+ padding: 5px;
+ background-color: #fff;
+ color: red;
+ }</style></div><div class="comment-load-more"></div><div class="make-comment"><form id="comment_form" class="form-group"><div class="row"><!-- <div class="col-md-12 comment-notes"><span id="email-notes">Your email address will not be published. Required fields are marked <span class="required">*</span>.</span></div> --><div class="col-md-12" id="comment_errors"></div><div class="col-md-6"><input id="comment_author" name="comment_author" class="form-control" type="text" value="" size="30" maxlength="50" placeholder="Name" autocomplete="off"></div><div class="col-md-6"><input id="comment_email" name="comment_email" type="input" value="" size="30" class="form-control" maxlength="100" placeholder="Email" autocomplete="off"></div><div class="col-md-12"><textarea id="comment_content" name="comment_content" class="form-control" cols="45" rows="3" maxlength="65525" placeholder="Content"></textarea></div><div class="col-md-12" style="padding-top:10px;padding-bottom:10px"><input id="commentChecked" type="checkbox" name="commentChecked"><label for="commentChecked" style="display:unset!important;cursor:pointer;" class="commentChecked-text">I'd read and agree to the terms and conditions.</label></div><div class="col-md-12 pull-center" style="padding-bottom: 10px;"><input name="submit" type="submit" class="submit btn btn-primary" value="Comment" /><input type="hidden" name="parent_id" id="parent_id" value="0" /><input type="button" onclick="reply_all(); return false;" id="btn_cancel" class="submit btn btn-primary pull-right hidden" value="Cancel" /><!-- <p id="msg"> Thank you for commenting. Please leave constructive comments, respect other people’s opinions, and stay on topic <span class="required">*</span>.</p> --></div></div></form></div><script>document.addEventListener("DOMContentLoaded", (event) => {
+
+
+ jQuery("#go_to_comment").click(function() {
+ jQuery("html, body").animate({
+ scrollTop: jQuery("#comment_form").offset().top
+ }, 1000);
+ });
+ jQuery("#comment_form").validate({
+ focusInvalid: false,
+ onfocusout: false,
+ errorElement: "div",
+ errorPlacement: function(error, element) {
+ error.appendTo("div#comment_errors");
+ },
+ ignore: ".ignore",
+ rules: {
+ "comment_content": {
+ required: true,
+ maxlength: 65525
+ },
+ "comment_author": {
+ required: true,
+ maxlength: 50
+ },
+ "comment_email": {
+ required: true,
+ email: true,
+ maxlength: 100
+ },
+ "commentChecked": {
+ required: true
+ }
+ },
+ messages: {
+ "comment_content": {
+ required: "Please type your comment!",
+ maxlength: ""
+ },
+ "comment_author": {
+ required: "Please type your name!",
+ maxlength: ""
+ },
+ "comment_email": {
+ required: "Please type your email",
+ email: "Check your email is not exactly!",
+ maxlength: ""
+ },
+ "commentChecked": {
+ required: "Please agree to the terms and conditions before comment."
+ }
+ },
+ submitHandler: function() {
+ console.log('here');
+ jQuery(".comment_loading").show();
+ var question_ajax = "/make-comment.ajax";
+ var content = jQuery("#comment_content").val();
+ var author = jQuery("#comment_author").val();
+ var email = jQuery("#comment_email").val();;
+ var website = jQuery("#comment_website").val();
+ var parent_id = jQuery("#parent_id").val();
+ var metadataload = {};
+ metadataload.content = content;
+ metadataload.author = author;
+ metadataload.email = email;
+ metadataload.website = website;
+ metadataload.parent_id = parent_id;
+ metadataload.related_id = parseInt("0");
+ metadataload.related_url = "http://slopegameaz.io/escape-road-3";
+ jQuery.ajax({
+ url: question_ajax,
+ data: metadataload,
+ type: 'POST',
+ success: function(data) {
+ jQuery(".comment_loading").hide();
+ if (data != '') {
+ var result = jQuery.parseJSON(data);
+ if (result.result === true) {
+ var comment_data = result.comment;
+ var str_comment = "";
+ if (comment_data.parent_id == 0) {
+ str_comment = `<div id="comment_${comment_data.id}" class="replyWrap your_comment clearAfter"><div class="listProfile"><div class="img img-thumbnail">${comment_data.author.charAt(0)}</div><span class="user">${comment_data.author}</span><span class="user">${comment_data.date}</span></div><div class="listContent"><div class="comment--content">${comment_data.content}</div><div class="control-action"><a class="icon comment" href="javascript:;" onclick="reply_to(${comment_data.id});
+ return false;" title="Add a comment to this comment" rel="nofollow"><svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.2929 13.2929C13.9024 13.6834 13.9024 14.3166 14.2929 14.7071C14.6834 15.0976 15.3166 15.0976 15.7071 14.7071L20.7071 9.70711C21.0976 9.31658 21.0976 8.68342 20.7071 8.29289L15.7071 3.29289C15.3166 2.90237 14.6834 2.90237 14.2929 3.29289C13.9024 3.68342 13.9024 4.31658 14.2929 4.70711L17.5858 8H8C6.67392 8 5.40215 8.52678 4.46447 9.46447C3.52678 10.4021 3 11.6739 3 13V20C3 20.5523 3.44771 21 4 21C4.55229 21 5 20.5523 5 20V13C5 12.2044 5.31607 11.4413 5.87868 10.8787C6.44129 10.3161 7.20435 10 8 10H17.5858L14.2929 13.2929Z" /></svg><b class="comment--reply">Reply</b></a><a class="icon vote comment_vote_row_${comment_data.id} voteUp" href="javascript:;" onclick="comment_vote(${comment_data.id}, 'up');
+ return false;" title="Vote this comment up (helpful)" rel="nofollow"><svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="style=fill"><g id="like"><path id="Subtract" fill-rule="evenodd" clip-rule="evenodd" d="M15.9977 5.63891C16.2695 4.34931 15.433 3.00969 14.2102 2.59462C13.6171 2.37633 12.9892 2.4252 12.4662 2.60499C11.9449 2.78419 11.4461 3.12142 11.1369 3.58441L11.136 3.58573L7.49506 9.00272C8.05104 9.29585 8.43005 9.87954 8.43005 10.5518V21.3018H6.91003V21.3018H16.6801C18.2938 21.3018 19.2028 20.2977 19.8943 19.202C20.6524 18.0009 21.1453 16.7211 21.5116 15.5812C21.6808 15.0546 21.8252 14.5503 21.9547 14.0984L21.9863 13.9881C22.126 13.5007 22.2457 13.0904 22.366 12.7549C22.698 11.8292 22.5933 10.9072 22.067 10.2072C21.5476 9.5166 20.7005 9.15175 19.76 9.15175H15.76C15.6702 9.15175 15.6017 9.11544 15.5599 9.06803C15.5238 9.02716 15.4831 8.95058 15.502 8.81171L15.9977 5.63891Z" fill="" /><path id="rec" d="M2.18005 10.6199C2.18005 10.03 2.62777 9.55176 3.18005 9.55176H6.68005C7.23234 9.55176 7.68005 10.03 7.68005 10.6199V21.3018H3.18005C2.62777 21.3018 2.18005 20.8235 2.18005 20.2336V10.6199Z" fill="" /></g></g></svg><b class="voteUp" id="comment_voteup_${comment_data.id}">${comment_data.like}</b></a><a class="icon vote comment_vote_row_${comment_data.id} voteDown" href="javascript:;" onclick="comment_vote(${comment_data.id}, 'down');
+ return false;" title="Vote this comment down (not helpful)" rel="nofollow"><svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="style=fill"><g id="like"><path id="Subtract" fill-rule="evenodd" clip-rule="evenodd" d="M15.9977 5.63891C16.2695 4.34931 15.433 3.00969 14.2102 2.59462C13.6171 2.37633 12.9892 2.4252 12.4662 2.60499C11.9449 2.78419 11.4461 3.12142 11.1369 3.58441L11.136 3.58573L7.49506 9.00272C8.05104 9.29585 8.43005 9.87954 8.43005 10.5518V21.3018H6.91003V21.3018H16.6801C18.2938 21.3018 19.2028 20.2977 19.8943 19.202C20.6524 18.0009 21.1453 16.7211 21.5116 15.5812C21.6808 15.0546 21.8252 14.5503 21.9547 14.0984L21.9863 13.9881C22.126 13.5007 22.2457 13.0904 22.366 12.7549C22.698 11.8292 22.5933 10.9072 22.067 10.2072C21.5476 9.5166 20.7005 9.15175 19.76 9.15175H15.76C15.6702 9.15175 15.6017 9.11544 15.5599 9.06803C15.5238 9.02716 15.4831 8.95058 15.502 8.81171L15.9977 5.63891Z" fill="" /><path id="rec" d="M2.18005 10.6199C2.18005 10.03 2.62777 9.55176 3.18005 9.55176H6.68005C7.23234 9.55176 7.68005 10.03 7.68005 10.6199V21.3018H3.18005C2.62777 21.3018 2.18005 20.8235 2.18005 20.2336V10.6199Z" fill="" /></g></g></svg><b class="voteDown" id="comment_votedown_${comment_data.id}">${comment_data.dislike}</b> </a></div></div></div>`;
+ if (comment_data.status == 'trash') {
+ str_comment += "<p><i>Your comment is awaiting moderation!</i></p>";
+ }
+ jQuery("#list_comment").prepend(str_comment);
+ } else {
+ str_comment = `<div id="comment_${comment_data.id}" class="replyWrap your_comment clearAfter"><div class="listProfile"><div class="img img-thumbnail">${comment_data.author.charAt(0)}</div><span class="user">${comment_data.author}</span><span class="user">${comment_data.date}</span></div><div class="listContent"><div class="comment--content">${comment_data.content}</div></div></div>`;
+ if (comment_data.status == 'trash') {
+ str_comment += "<p><i>Your comment is awaiting moderation!</i></p>";
+ }
+ jQuery("#comment_" + comment_data.parent_id).append(str_comment);
+ jQuery("#comment_form").appendTo(".make-comment");
+ jQuery("#comment_form").removeClass("commentBlock");
+ reply_all();
+ }
+
+ jQuery("#comment_count").html(parseInt(("0")));
+ jQuery("html, body").animate({
+ scrollTop: jQuery("#list_comment").offset().top
+ }, 1000);
+ jQuery("#comment_form").trigger("reset");
+
+ }
+ }
+ }
+ });
+ }
+ });
+ });</script><script>function reply_to(comment_id) {
+ jQuery("#comment_form").addClass("commentBlock");
+ jQuery("#btn_cancel").removeClass("hidden");
+ jQuery("#comment_form").trigger("reset");
+ jQuery("#parent_id").val(comment_id);
+ jQuery("#comment_form").appendTo("#comment_" + comment_id);
+ }
+
+ function reply_all() {
+ jQuery("#comment_form").trigger("reset");
+ jQuery("#parent_id").val("0");
+ jQuery("#comment_form").appendTo(".make-comment");
+ jQuery("#btn_cancel").addClass("hidden");
+ jQuery("#comment_form").removeClass("commentBlock");
+ }
+
+ function comment_vote(comment_id, vote) {
+ jQuery(".comment_vote_row_" + comment_id).css("fontSize", 0);
+ jQuery(".comment_vote_row_" + comment_id).prop('onclick', null).off('click');
+
+ var comment_comment_voteajax = "/comment-vote.ajax";
+ var metadataload = {};
+ metadataload.comment_id = comment_id;
+ metadataload.vote = vote;
+ jQuery.ajax({
+ url: comment_comment_voteajax,
+ data: metadataload,
+ type: 'POST',
+ success: function(data) {
+ if (data != '') {
+ var result = jQuery.parseJSON(data);
+ if (result.result === true) {
+ var comment_obj = result.comment;
+ switch (vote) {
+ case "up":
+ jQuery("#comment_voteup_" + comment_id).html(comment_obj.like);
+ break;
+ case "down":
+ jQuery("#comment_votedown_" + comment_id).html(comment_obj.dislike);
+ break;
+ }
+
+ }
+ }
+ }
+ });
+ }
+
+ function report_comment(comment_id) {
+ jQuery("#report_comment_" + comment_id).css("fontSize", 0);
+ jQuery("#report_comment_" + comment_id).prop('onclick', null).off('click');
+ }</script><script>document.addEventListener("DOMContentLoaded", (event) => {
+ jQuery("#btn_comments_area").click(function() {
+ jQuery("html, body").animate({
+ scrollTop: jQuery("#comment_form").offset().top
+ }, 1000);
+ });
+ jQuery('#load_more_comment').click(function(event) {
+ event.preventDefault();
+ var page = jQuery(this).data("page");
+ var limit = jQuery(this).data("limit");
+ var sort = jQuery(this).data("sort");
+ var url = jQuery(this).data("url");
+ load_comment(page, limit, sort, url, '#list_comment', '');
+ });
+ jQuery('#sort_by').on('change', function() {
+ load_comment(1, 5, "" + this.value + "", "http://slopegameaz.io/escape-road-3", "#list_comment", "f5");
+ });
+ });
+
+ function load_comment(page, limit, sort, url, main_contain_id, refresh) {
+ jQuery("#load_more_comment").remove();
+ jQuery(".comment-load-more").show();
+ var mainposturl = "/comment-paging.ajax";
+ var metadataload = {};
+ metadataload.page = page;
+ metadataload.limit = limit;
+ metadataload.sort = sort;
+ metadataload.url = url;
+ jQuery.ajax({
+ url: mainposturl,
+ data: metadataload,
+ type: 'POST',
+ success: function(data) {
+ jQuery(".comment-load-more").hide();
+ if (refresh === 'f5') {
+ jQuery(main_contain_id).html(data);
+ } else {
+ jQuery(main_contain_id).append(data);
+ }
+ jQuery('#load_more_comment').click(function(event) {
+ event.preventDefault();
+ var page = jQuery(this).data("page");
+ var limit = jQuery(this).data("limit");
+ var sort = jQuery(this).data("sort");
+ var url = jQuery(this).data("url");
+ load_comment(page, limit, sort, url, '#list_comment', '');
+ });
+ }
+ });
+ }
+ //load_comment(1, 5, "newest", "http://slopegameaz.io/escape-road-3", "#list_comment", "");</script><script>function commentUpdateStatus(event, id) {
+ let status = $(event).val();
+ if (!id) return;
+ var url = '/comment-update.ajax';
+ jQuery.ajax({
+ url: url,
+ type: "POST",
+ data: {
+ id: id,
+ status: status
+ },
+ success: function(response) {
+ if (response == 1) {
+ alert("Update successfully!");
+ } else {
+ alert("Update failed! Please contact Administrators");
+ }
+ }
+ })
+ }</script></div></div><style>#comments_area .row {
+ display: flex;
+ margin: 0 -15px;
+ flex-wrap: wrap;
+ width: unset
+ }
+
+ #comments_area .col-md-12 {
+ box-sizing: border-box;
+ width: 100%;
+ padding: 0 15px;
+ }
+
+ #comments_area .col-md-6 {
+ box-sizing: border-box;
+ padding: 0 15px;
+ width: 50%
+ }
+
+ #comments_area .col-md-4 {
+ box-sizing: border-box;
+ padding: 0 15px;
+ width: 33.33%
+ }
+
+ .comment-header,
+ .comment-count {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ font-weight: 600;
+ }
+
+ #comment_count {
+ margin-left: 5px;
+ }
+
+ .comment-load-more,
+ .comment_loading {
+ background: url('/themes/hotgames.io/rs/imgs/comments/icon_loader.gif') 0 0/100% auto no-repeat;
+ width: 70px;
+ height: 50px;
+ margin: 0 auto;
+ display: none
+ }
+
+ .col-all {
+ display: flex;
+ flex-basis: auto
+ }
+
+ .replyWrap {
+ position: relative;
+ background: url('/themes/hotgames.io/rs/imgs/comments/quote.png') right top no-repeat;
+ border-top: 1px solid #e8e8e8
+ }
+
+ .clearAfter {
+ display: block;
+ clear: both;
+ padding: 10px 0;
+ }
+
+ .listProfile {
+ display: flex;
+ align-items: center;
+ margin-bottom: 10px;
+ }
+
+ .listProfile .user {
+ font-size: 12px;
+ margin-right: 10px;
+ }
+
+ .listProfile .user:nth-child(2) {
+ text-decoration: underline;
+ }
+
+ .listProfile .user:nth-child(3) {
+ opacity: 0.85;
+ }
+
+ .listContent {
+ position: relative;
+ overflow: hidden
+ }
+
+ .replyWrap .left {
+ float: left;
+ padding: 0
+ }
+
+ .replyWrap b.voteUp {
+ color: #3998f7;
+ margin-left: 5px;
+ }
+
+ .replyWrap .rating b {
+ font-weight: 400
+ }
+
+ .replyWrap b.voteDown {
+ color: #ef3056
+ }
+
+ .replyWrap a.icon.voteDown svg {
+ transform: rotate(-180deg);
+ fill: #ef3056;
+ }
+
+ .replyWrap a.icon.voteUp svg {
+ fill: #3998f7;
+ }
+
+ .replyWrap .right {
+ float: right;
+ padding: 0
+ }
+
+ .replyWrap a.icon {
+ display: flex;
+ align-items: center;
+ letter-spacing: -1px;
+ font-size: 12px;
+ padding: 0;
+ padding: 2px;
+ margin-right: 8px;
+
+ }
+
+ .replyWrap a.icon>svg {
+ width: 18px;
+ height: 18px;
+ fill: #4b80c9;
+ }
+
+ .icon {
+ padding-left: 20px;
+ background-position: left center;
+ background-repeat: no-repeat
+ }
+
+ a.icon {
+ border: 0 !important
+ }
+
+ .replyWrap a.icon>b {
+ font-size: 16px;
+ line-height: 1;
+ margin-left: 2px;
+ opacity: 0.8;
+ }
+
+ .commentBlock {
+ border-top: 1px solid #e8e8e8;
+ }
+
+ .commentBlock .listProfile {
+ margin-left: 0;
+ padding-left: 6px;
+ text-align: center
+ }
+
+ .your_comment {
+ padding: 10px;
+ }
+
+ /* .comment {
+ background-image: url('/themes/hotgames.io/rs/imgs/comments/comment.png')
+ }
+
+ .replyWrap a.voteUp {
+ background-image: url('/themes/hotgames.io/rs/imgs/comments/thumbs_up.png')
+ }
+
+ .replyWrap a.voteDown {
+ background-image: url('/themes/hotgames.io/rs/imgs/comments/thumbs_down.png')
+ } */
+
+ .replyWrap a.report {
+ background-position: 0 2px
+ }
+
+
+ /* a.fav {
+ background-image: url('/themes/hotgames.io/rs/imgs/comments/heart.png')
+ }
+
+ .report {
+ background-image: url('/themes/hotgames.io/rs/imgs/comments/report.png')
+ } */
+
+ .commentLink {
+ float: left;
+ padding-left: 35px;
+ background: url('/themes/hotgames.io/rs/imgs/comments/comment_comment.png') left center no-repeat;
+ border: 0;
+ line-height: 26px
+ }
+
+ #rc-imageselect {
+ transform: scale(.77);
+ -webkit-transform: scale(.77);
+ transform-origin: 0 0;
+ -webkit-transform-origin: 0 0
+ }
+
+ @media screen and (max-height:575px) {
+
+ #rc-imageselect,
+ .g-recaptcha {
+ transform: scale(.77);
+ -webkit-transform: scale(.77);
+ transform-origin: 0 0;
+ -webkit-transform-origin: 0 0
+ }
+ }
+
+ .required {
+ color: red
+ }
+
+ input.error,
+ textarea.error {
+ border: 1px solid red !important
+ }
+
+ div.error,
+ label.error {
+ font-weight: 400;
+ color: red !important;
+ display: block
+ }
+
+ .text-normal {
+ font-weight: 400 !important
+ }
+
+ .make-comment label {
+ display: block;
+ margin-right: 12px;
+ padding: 10px 0
+ }
+
+ #respond textarea {
+ background-color: #fff;
+ border: 1px solid #ddd;
+ color: #333;
+ font-size: 18px;
+ font-size: 1.8rem;
+ font-weight: 400;
+ padding: 16px;
+ width: 100%
+ }
+
+ .btn,
+ .form-control {
+ font-size: 14px;
+ line-height: 1.42857143;
+ background-image: none
+ }
+
+ #comments_area {
+ text-align: left;
+ color: inherit;
+ line-height: 1.5
+ }
+
+ .form-control {
+ display: block;
+ width: 100%;
+ /* height: 34px; */
+ color: #555;
+ background-color: #fff;
+ border: 1px solid #ccc;
+ border-radius: 4px;
+ -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+ box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+ -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+ -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+ transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+ box-sizing: border-box;
+ padding: 10px 15px;
+ margin-top: 15px;
+ }
+
+ textarea.form-control {
+ height: auto
+ }
+
+ .btn {
+ display: inline-block;
+ padding: 6px 12px;
+ margin-bottom: 0;
+ font-weight: 400;
+ text-align: center;
+ white-space: nowrap;
+ vertical-align: middle;
+ cursor: pointer;
+ -webkit-user-select: none;
+ -moz-user-select: none;
+ -ms-user-select: none;
+ user-select: none;
+ border: 1px solid transparent;
+ border-radius: 4px
+ }
+
+ .btn-primary {
+ background-color: #4b80c9;
+ border-color: #4b80c9;
+ color: #fff
+ }
+
+ .btn-primary:hover {
+ font-weight: 700
+ }
+
+ .hidden {
+ display: none
+ }
+
+ .pull-right {
+ float: right !important
+ }
+
+ .comment-date {
+ /* white-space: nowrap; */
+ /* font-size: 10px; */
+ }
+
+ select.input-sm {
+ height: 30px;
+ line-height: 30px;
+ margin: 10px
+ }
+
+ #list_comment a {
+ color: inherit
+ }
+
+ #load_more_comment {
+ color: #fff !important;
+ }
+
+ #msg {
+ padding: 10px 0;
+ font-style: italic
+ }
+
+ .comment-notes {
+ padding-bottom: 10px;
+ font-style: italic
+ }
+
+ #comment_form {
+ clear: both
+ }
+
+ .question-title {
+ padding-left: 15px
+ }
+
+ #sort_by {
+ color: inherit;
+ }
+
+ #sort_by option {
+ color: #000;
+ }
+
+ #comments_area .img-thumbnail {
+ display: inline-block;
+ -webkit-transition: all .2s ease-in-out;
+ -o-transition: all .2s ease-in-out;
+ transition: all .2s ease-in-out;
+ border-radius: 50%;
+ background-color: #4b80c9;
+ color: #fff;
+ text-transform: uppercase;
+ width: 45px;
+ height: 45px;
+ line-height: 45px;
+ text-align: center;
+ margin-right: 10px;
+ font-weight: 600;
+ font-size: 20px;
+ }
+
+ .listProfile img {
+ width: auto;
+ height: auto
+ }
+
+ .img-cirle {
+ width: 24px !important;
+ height: 24px !important
+ }
+
+ .comment--content {
+ margin-bottom: 10px;
+ word-break: break-word;
+ }
+
+ .control-action {
+ display: flex;
+ align-items: center;
+ }
+
+ .comment__reply {
+ padding-left: 20px;
+ /* border-left: 2px dashed #e8e8e8; */
+ margin-left: 20px;
+ }
+
+ p>i {
+ font-size: 12px;
+ }
+
+ @media (max-width:991px) {
+ #comments_area .col-md-4 {
+ width: 100%
+ }
+ }
+
+ .adminManager {
+ margin-left: auto;
+ padding: 5px 10px;
+ cursor: pointer;
+ background-color: #fff;
+ color: #000;
+ border: 1px solid #ccc;
+ }</style> </div></div></div>
+</div><div class="game__suggest-col"><div class="game__related"><a class="games-label" href="/hot-games"><p class="">Hot Games</p><img width="31" height="31" src="themes/slopegameaz.io/rs/imgs/emoji-popular.png"></a><div class="game__related-grid"><a class="grid__game--item" href="/slope-game"><img class="d-block" loading="" width="100" height="100" src="/cache/data/image/game/slope-game-f90x90.webp" alt="Slope Game" title="Slope Game" /><span class="grid__game--item-title text-overflow">Slope Game</span></a><a class="grid__game--item" href="/slope-2"><img class="d-block" loading="" width="100" height="100" src="/cache/data/image/game/slope-2-f90x90.webp" alt="Slope 2" title="Slope 2" /><span class="grid__game--item-title text-overflow">Slope 2</span></a><a class="grid__game--item" href="/space-waves"><img class="d-block" loading="" width="100" height="100" src="/cache/data/image/game/space-waves-f90x90.webp" alt="Space Waves" title="Space Waves" /><span class="grid__game--item-title text-overflow">Space Waves</span></a><a class="grid__game--item" href="/slope-rider"><img class="d-block" loading="" width="100" height="100" src="/cache/data/image/game/slope-rider1-f90x90.webp" alt="Slope Rider" title="Slope Rider" /><span class="grid__game--item-title text-overflow">Slope Rider</span></a><a class="grid__game--item" href="/slope-3"><img class="d-block" loading="" width="100" height="100" src="/cache/data/image/game/Slope-3-game-f90x90.webp" alt="Slope 3" title="Slope 3" /><span class="grid__game--item-title text-overflow">Slope 3</span></a><a class="grid__game--item" href="/wave-rider"><img class="d-block" loading="" width="100" height="100" src="/cache/data/image/game/WaveRidergameonline-f90x90.webp" alt="Wave Rider" title="Wave Rider" /><span class="grid__game--item-title text-overflow">Wave Rider</span></a><a class="grid__game--item" href="/traffic-jam-3d"><img class="d-block" loading="" width="100" height="100" src="/cache/data/image/game/trafficjam3d-f90x90.webp" alt="Traffic jam 3d" title="Traffic jam 3d" /><span class="grid__game--item-title text-overflow">Traffic jam 3d</span></a><a class="grid__game--item" href="/traffic-road"><img class="d-block" loading="" width="100" height="100" src="/cache/data/image/game/TrafficRoad-f90x90.webp" alt="Traffic Road" title="Traffic Road" /><span class="grid__game--item-title text-overflow">Traffic Road</span></a><a class="grid__game--item" href="/curve-rush"><img class="d-block" loading="" width="100" height="100" src="/cache/data/image/game/CurveRush-f90x90.webp" alt="Curve Rush" title="Curve Rush" /><span class="grid__game--item-title text-overflow">Curve Rush</span></a><a class="grid__game--item" href="/slide-down"><img class="d-block" loading="" width="100" height="100" src="/cache/data/image/game/slidedown2-m200x200-f90x90.webp" alt="Slide Down" title="Slide Down" /><span class="grid__game--item-title text-overflow">Slide Down</span></a><a class="grid__game--item" href="/moto-x3m-2"><img class="d-block" loading="" width="100" height="100" src="/cache/data/image/game/moto-x3m-2-m200x200-f90x90.webp" alt="Moto X3M 2" title="Moto X3M 2" /><span class="grid__game--item-title text-overflow">Moto X3M 2</span></a><a class="grid__game--item" href="/soflo-wheelie-life"><img class="d-block" loading="" width="100" height="100" src="/cache/data/image/game/soflo-wheelie-life-f90x90.webp" alt="SoFlo Wheelie Life" title="SoFlo Wheelie Life" /><span class="grid__game--item-title text-overflow">SoFlo Wheelie Life</span></a></div></div><div class="game__related"><a class="games-label" href="/new-games"><p class="">New Games</p><img width="31" height="31" src="themes/slopegameaz.io/rs/imgs/emoji-new.png"></a><div class="game__related-grid"><a class="grid__game--item" href="/dash-masters"><img class="d-block" loading="lazy" width="100" height="100" src="/cache/data/image/game/DashMasters-f90x90.webp" alt="Dash Masters" title="Dash Masters" /><span class="grid__game--item-title text-overflow">Dash Masters</span></a><a class="grid__game--item" href="/speed-stars"><img class="d-block" loading="lazy" width="100" height="100" src="/cache/data/image/game/SpeedStars-f90x90.webp" alt="Speed ​​Stars" title="Speed ​​Stars" /><span class="grid__game--item-title text-overflow">Speed ​​Stars</span></a><a class="grid__game--item" href="/retro-sports-champion"><img class="d-block" loading="lazy" width="100" height="100" src="/cache/data/image/game/RetroSportsChampion-f90x90.webp" alt="Retro Sports Champion" title="Retro Sports Champion" /><span class="grid__game--item-title text-overflow">Retro Sports Champion</span></a><a class="grid__game--item" href="/rodha"><img class="d-block" loading="lazy" width="100" height="100" src="/cache/data/image/game/Rodhaunblocked-f90x90.webp" alt="Rodha" title="Rodha" /><span class="grid__game--item-title text-overflow">Rodha</span></a><a class="grid__game--item" href="/crazy-roll-3d"><img class="d-block" loading="lazy" width="100" height="100" src="/cache/data/image/game/CrazyRoll3D-f90x90.webp" alt="Crazy Roll 3D" title="Crazy Roll 3D" /><span class="grid__game--item-title text-overflow">Crazy Roll 3D</span></a><a class="grid__game--item" href="/wheel-quest"><img class="d-block" loading="lazy" width="100" height="100" src="/cache/data/image/game/WheelQuest-f90x90.webp" alt="Wheel Quest" title="Wheel Quest" /><span class="grid__game--item-title text-overflow">Wheel Quest</span></a><a class="grid__game--item" href="/cowboy-safari"><img class="d-block" loading="lazy" width="100" height="100" src="/cache/data/image/game/cowboysafarigame-f90x90.webp" alt="Cowboy Safari" title="Cowboy Safari" /><span class="grid__game--item-title text-overflow">Cowboy Safari</span></a><a class="grid__game--item" href="/tunnel-runner"><img class="d-block" loading="lazy" width="100" height="100" src="/cache/data/image/game/TunnelRunner-f90x90.webp" alt="Tunnel Runner" title="Tunnel Runner" /><span class="grid__game--item-title text-overflow">Tunnel Runner</span></a><a class="grid__game--item" href="/escape-vehicles"><img class="d-block" loading="lazy" width="100" height="100" src="/cache/data/image/game/EscapeVehiclesgame-f90x90.webp" alt="Escape Vehicles" title="Escape Vehicles" /><span class="grid__game--item-title text-overflow">Escape Vehicles</span></a><a class="grid__game--item" href="/wheelie-master"><img class="d-block" loading="lazy" width="100" height="100" src="/cache/data/image/game/WheelieMaster-f90x90.webp" alt="Wheelie Master" title="Wheelie Master" /><span class="grid__game--item-title text-overflow">Wheelie Master</span></a><a class="grid__game--item" href="/airborne-bmx"><img class="d-block" loading="lazy" width="100" height="100" src="/cache/data/image/game/Airbornebmxgame-f90x90.webp" alt="Airborne BMX" title="Airborne BMX" /><span class="grid__game--item-title text-overflow">Airborne BMX</span></a><a class="grid__game--item" href="/blocky-xtreme"><img class="d-block" loading="lazy" width="100" height="100" src="/cache/data/image/game/BlockyXtreme-1-f90x90.webp" alt="Blocky Xtreme" title="Blocky Xtreme" /><span class="grid__game--item-title text-overflow">Blocky Xtreme</span></a></div></div></div></div></div><div class="mobile-list-game"><div class="game_trending mobile "><div class="games-page-label mt-2 "><span>Popular games</span><img width="40" height="40" src="themes/slopegameaz.io/rs/imgs/emoji-popular.png"></div><div class="game_trending-list mt-2"><!-- Loading without lazy --><a href="/slope-game" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/slope-game-f200x200.webp" alt="" title="Slope Game" /><span class="text-overflow">Slope Game </span></div></a><a href="/slope-2" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/slope-2-f200x200.webp" alt="" title="Slope 2" /><span class="text-overflow">Slope 2 </span></div></a><a href="/space-waves" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/space-waves-f200x200.webp" alt="" title="Space Waves" /><span class="text-overflow">Space Waves </span></div></a><a href="/slope-rider" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/slope-rider1-f200x200.webp" alt="" title="Slope Rider" /><span class="text-overflow">Slope Rider </span></div></a><a href="/slope-3" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/Slope-3-game-f200x200.webp" alt="" title="Slope 3" /><span class="text-overflow">Slope 3 </span></div></a><a href="/wave-rider" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/WaveRidergameonline-f200x200.webp" alt="" title="Wave Rider" /><span class="text-overflow">Wave Rider </span></div></a><a href="/traffic-jam-3d" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/trafficjam3d-f200x200.webp" alt="" title="Traffic jam 3d" /><span class="text-overflow">Traffic jam 3d </span></div></a><a href="/traffic-road" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/TrafficRoad-f200x200.webp" alt="" title="Traffic Road" /><span class="text-overflow">Traffic Road </span></div></a><a href="/curve-rush" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/CurveRush-f200x200.webp" alt="" title="Curve Rush" /><span class="text-overflow">Curve Rush </span></div></a><a href="/slide-down" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/slidedown2-m200x200-f200x200.webp" alt="" title="Slide Down" /><span class="text-overflow">Slide Down </span></div></a><a href="/moto-x3m-2" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/moto-x3m-2-m200x200-f200x200.webp" alt="" title="Moto X3M 2" /><span class="text-overflow">Moto X3M 2 </span></div></a><a href="/soflo-wheelie-life" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/soflo-wheelie-life-f200x200.webp" alt="" title="SoFlo Wheelie Life" /><span class="text-overflow">SoFlo Wheelie Life </span></div></a><!-- Loading with lazy --></div></div> <div class="game_trending mobile "><div class="games-page-label mt-2 "><span>New games</span><img width="40" height="40" src="themes/slopegameaz.io/rs/imgs/emoji-new.png"></div><div class="game_trending-list mt-2"><!-- Loading without lazy --><a href="/dash-masters" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/DashMasters-f200x200.webp" alt="" title="Dash Masters" /><span class="text-overflow">Dash Masters </span></div></a><a href="/speed-stars" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/SpeedStars-f200x200.webp" alt="" title="Speed ​​Stars" /><span class="text-overflow">Speed ​​Stars </span></div></a><a href="/retro-sports-champion" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/RetroSportsChampion-f200x200.webp" alt="" title="Retro Sports Champion" /><span class="text-overflow">Retro Sports Champion </span></div></a><a href="/rodha" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/Rodhaunblocked-f200x200.webp" alt="" title="Rodha" /><span class="text-overflow">Rodha </span></div></a><a href="/crazy-roll-3d" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/CrazyRoll3D-f200x200.webp" alt="" title="Crazy Roll 3D" /><span class="text-overflow">Crazy Roll 3D </span></div></a><a href="/wheel-quest" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/WheelQuest-f200x200.webp" alt="" title="Wheel Quest" /><span class="text-overflow">Wheel Quest </span></div></a><a href="/cowboy-safari" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/cowboysafarigame-f200x200.webp" alt="" title="Cowboy Safari" /><span class="text-overflow">Cowboy Safari </span></div></a><a href="/tunnel-runner" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/TunnelRunner-f200x200.webp" alt="" title="Tunnel Runner" /><span class="text-overflow">Tunnel Runner </span></div></a><a href="/escape-vehicles" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/EscapeVehiclesgame-f200x200.webp" alt="" title="Escape Vehicles" /><span class="text-overflow">Escape Vehicles </span></div></a><a href="/wheelie-master" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/WheelieMaster-f200x200.webp" alt="" title="Wheelie Master" /><span class="text-overflow">Wheelie Master </span></div></a><a href="/airborne-bmx" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/Airbornebmxgame-f200x200.webp" alt="" title="Airborne BMX" /><span class="text-overflow">Airborne BMX </span></div></a><a href="/blocky-xtreme" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/BlockyXtreme-1-f200x200.webp" alt="" title="Blocky Xtreme" /><span class="text-overflow">Blocky Xtreme </span></div></a><!-- Loading with lazy --></div></div> <div class="game_trending "><div class="games-page-label mt-2 "><span>Trending games</span><img width="40" height="40" src="themes/slopegameaz.io/rs/imgs/emoji-trending.png"></div><div class="game_trending-list mt-2"><!-- Loading without lazy --><a href="/curve-rush" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/CurveRush-f200x200.webp" alt="" title="Curve Rush" /><span class="text-overflow">Curve Rush </span></div></a><a href="/race-survival" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/survival-race-m210x210-f200x200.webp" alt="" title="Race Survival" /><span class="text-overflow">Race Survival </span></div></a><a href="/moto-x3m" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/MotoX3Monline-f200x200.webp" alt="" title="Moto X3M" /><span class="text-overflow">Moto X3M </span></div></a><a href="/tap-road" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/tap-road-online-f200x200.webp" alt="" title="Tap Road" /><span class="text-overflow">Tap Road </span></div></a><a href="/slippery-slope" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/SlipperySlope-f200x200.webp" alt="" title="Slippery Slope" /><span class="text-overflow">Slippery Slope </span></div></a><a href="/run-3" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/run3game-f200x200.webp" alt="" title="Run 3" /><span class="text-overflow">Run 3 </span></div></a><a href="/jetski-race" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/jetski-race-online-f200x200.webp" alt="" title="Jetski Race" /><span class="text-overflow">Jetski Race </span></div></a><a href="/going-balls" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/going-balls-f200x200.webp" alt="" title="Going Balls" /><span class="text-overflow">Going Balls </span></div></a><a href="/track-dash" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/TrackDash-f200x200.webp" alt="" title="Track Dash" /><span class="text-overflow">Track Dash </span></div></a><a href="/street-wheelie" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/StreetWheelie-f200x200.webp" alt="" title="Street Wheelie" /><span class="text-overflow">Street Wheelie </span></div></a><a href="/subway-crackers" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/SubwayCrackers-f200x200.webp" alt="" title="Subway Crackers" /><span class="text-overflow">Subway Crackers </span></div></a><a href="/shape-rush" class="game_trending-item"><div class="game_trending-wrapper"><img width="200" height="200" class="d-block" src="/cache/data/image/game/ShapeRush-f200x200.webp" alt="" title="Shape Rush" /><span class="text-overflow">Shape Rush </span></div></a><!-- Loading with lazy --></div></div> </div>
+
+</div></section><script>id_game = "47";
+ url_game = "";</script><script>function caroseulControl(me, action) {
+ let parent = me.parentNode;
+ let scrollContainer = parent.querySelector(".GameCarousel_prime");
+ let scrollAmount = scrollContainer.clientWidth - me.clientWidth - 6 * 4;
+ if (action === "prev") {
+ scrollAmount = -scrollAmount;
+ }
+ scrollContainer.scrollBy({
+ left: scrollAmount,
+ behavior: 'smooth'
+ });
+ }
+
+ function setupCarouselControls() {
+ const allCarousels = document.querySelectorAll(".GameCarousel_prime");
+ allCarousels.forEach(scrollContainer => {
+ const parent = scrollContainer.parentNode;
+ const prevButton = parent.querySelector(".GameCarousel_root_arrowleft");
+ const nextButton = parent.querySelector(".GameCarousel_root_arrowright");
+
+ if (!prevButton || !nextButton) {
+ return;
+ }
+
+ function updateButtonVisibility() {
+ const canScrollLeft = scrollContainer.scrollLeft > 0;
+ const canScrollRight = scrollContainer.scrollLeft + scrollContainer.clientWidth < scrollContainer.scrollWidth - 1;
+
+ prevButton.disabled = !canScrollLeft;
+ nextButton.disabled = !canScrollRight;
+ const shouldHideButtons = scrollContainer.scrollWidth <= scrollContainer.clientWidth;
+ prevButton.hidden = shouldHideButtons;
+ nextButton.hidden = shouldHideButtons;
+ }
+ scrollContainer.addEventListener('scroll', updateButtonVisibility);
+ prevButton.addEventListener('click', () => caroseulControl(prevButton, 'prev'));
+ nextButton.addEventListener('click', () => caroseulControl(nextButton, 'next'));
+ updateButtonVisibility();
+ });
+ }
+ document.addEventListener('DOMContentLoaded', setupCarouselControls);
+ window.addEventListener('resize', setupCarouselControls);</script><script type="application/ld+json">[{"@context":"https:\/\/schema.org","@type":"SoftwareApplication","name":"Escape Road 3","url":"https:\/\/slopegameaz.io\/escape-road-3","author":{"@type":"Organization","name":"Slope Game"},"description":"Escape Road 3 was the most thrilling escape racing gameplay, with magnificent chases and a potential sequel. Experience the difference and challenge your talents.","applicationCategory":"GameApplication","operatingSystem":"any","aggregateRating":{"@type":"AggregateRating","worstRating":1,"bestRating":5,"ratingValue":4.7,"ratingCount":61},"image":"https:\/\/slopegameaz.io\/data\/image\/game\/EscapeRoad3-1.png","offers":{"@type":"Offer","category":"free","price":0,"priceCurrency":"USD"}},{"@context":"https:\/\/schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Slope Game","item":"https:\/\/slopegameaz.io"},{"@type":"ListItem","position":2,"name":"Escape Road 3","item":"https:\/\/slopegameaz.io\/escape-road-3"}]}]</script><footer><div class="container"><div class="row"><div class="contact_link"><a class="link" href="/about-us">About Us</a><a class="link" href="/contact-us" title="Contact Us">Contact</a><a class="link" href="/term-of-use">Term Of Use</a><a class="link" href="/privacy-policy">Privacy Policy</a><a class="link" href="/copyright-infringement-notice-procedure">Copyright</a></div><p class="text-center" style="margin:1rem 0;color:#fff;"><a style="color:var(--color-yellow)" href="/">Slope Game</a> is an independent website. It is not affiliated with any organizations.</p></div></div></footer><span id="back-to-top" title="Back to top">↑</span><script src="/themes/slopegameaz.io/rs/js/jquery-3.4.1.min.js"></script><script src="/themes/slopegameaz.io/rs/js/jquery.validate.min.js"></script><script src="/themes/slopegameaz.io/rs/js/footer.js"></script><script>window.addEventListener('resize', function(event) {
+ const width = event.target.outerWidth * 678 / 1366;
+ if (window.outerWidth < 800) {
+ $("#iframehtml5").attr("height", 600);
+ } else {
+ $("#iframehtml5").attr("height", width * 9 / 16);
+ }
+ });</script><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"19f8262109f54b979bc8be5da9bfe872","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body></html>
